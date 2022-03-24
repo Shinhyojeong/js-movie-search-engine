@@ -9,7 +9,16 @@ module.exports = {
     clean: true
   },
   resolve: {
-    extensions: [".js"]
+    extensions: [".js"],
+    alias: {
+      "@api": path.resolve(__dirname, "src/api"),
+      "@components": path.resolve(__dirname, "src/components"),
+      "@base": path.resolve(__dirname, "src/components/base"),
+      "@domain": path.resolve(__dirname, "src/components/domain"),
+      "@data": path.resolve(__dirname, "src/data"),
+      "@style": path.resolve(__dirname, "src/style"),
+      "@utils": path.resolve(__dirname, "src/utils")
+    }
   },
   module: {
     rules: [
