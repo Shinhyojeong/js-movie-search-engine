@@ -6,6 +6,7 @@
     "dev": "webpack-dev-server --mode development",
     "start": "webpack-dev-server --mode production"
   },
+  "browserslist": "> 0.25%, not dead",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shinhyojeong/js-movie-search-engine.git"
@@ -16,13 +17,22 @@
   },
   "homepage": "https://github.com/Shinhyojeong/js-movie-search-engine#readme",
   "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime-corejs3": "^7.17.8",
+    "babel-loader": "^8.2.4",
+    "cache": "^2.3.1",
     "css-loader": "^6.7.1",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
+    "npm": "^8.5.5",
     "prettier": "2.6.0",
+    "verify": "^0.1.2",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4"
