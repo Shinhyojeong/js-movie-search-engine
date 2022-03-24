@@ -1,0 +1,26 @@
+{
+  "name": "js-movie-search-engine",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development",
+    "start": "webpack-dev-server --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shinhyojeong/js-movie-search-engine.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shinhyojeong/js-movie-search-engine/issues"
+  },
+  "homepage": "https://github.com/Shinhyojeong/js-movie-search-engine#readme",
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}
