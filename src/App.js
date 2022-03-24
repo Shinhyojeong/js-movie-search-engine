@@ -1,3 +1,10 @@
+import { Text } from "@base"
+
 export default function App({ targetEl }) {
-  targetEl.textContent = "Test"
+  new Text({
+    targetEl,
+    initialState: {
+      content: "Test"
+    }
+  })
 }
