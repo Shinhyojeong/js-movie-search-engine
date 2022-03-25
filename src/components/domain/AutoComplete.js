@@ -17,9 +17,9 @@ export default function AutoComplete({ targetEl, initialState }) {
   this.render = () => {
     autoCompleteEl.innerHTML = ``
 
-    const { resultList } = this.state
+    const { autoCompleteList } = this.state
 
-    resultList?.forEach(({ text, id }) => {
+    autoCompleteList?.forEach(({ text, id }) => {
       new Text({
         targetEl: autoCompleteEl,
         initialState: {

@@ -1,17 +1,21 @@
 import { Header, AutoComplete, SearchBar } from "@domain"
 import { request } from "@api/api"
+import storage from "@utils/storage"
 import { debounce } from "@utils/optimization"
+import { STORAGE } from "@data/constant"
 
 export default function App({ targetEl }) {
   this.state = {
-    resultList: []
+    autoCompleteList: []
   }
+
+  this.cache = storage.getItem(STORAGE.AUTO_COMPLETE_LIST, {})
 
   this.setState = (nextState) => {
     this.state = nextState
     autoComplete.setState({
       ...autoComplete.state,
-      resultList: this.state.resultList
+      autoCompleteList: this.state.autoCompleteList
     })
   }
 
@@ -25,11 +29,22 @@ export default function App({ targetEl }) {
   new SearchBar({
     targetEl,
     onSubmit: debounce(async (value) => {
-      const resultList = await request(`/autocomplete?value=${value}`)
+      const cachedAutoCompleteList = this.cache[value]
+
+      let autoCompleteList = null
+
+      if (cachedAutoCompleteList) {
+        autoCompleteList = cachedAutoCompleteList
+      } else {
+        autoCompleteList = await request(`/autocomplete?value=${value}`)
+
+        this.cache[value] = autoCompleteList
+        storage.setItem(STORAGE.AUTO_COMPLETE_LIST, this.cache)
+      }
 
       this.setState({
         ...this.state,
-        resultList
+        autoCompleteList
       })
     }, 200)
   })
@@ -37,7 +52,7 @@ export default function App({ targetEl }) {
   const autoComplete = new AutoComplete({
     targetEl,
     initialState: {
-      resultList: this.state.resultList
+      autoCompleteList: this.state.autoCompleteList
     }
   })
 }
