@@ -10,6 +10,10 @@ export default function Image({ targetEl, initialState }) {
     this.render()
   }
 
+  this.reset = () => {
+    this.setState(initialState)
+  }
+
   this.render = () => {
     const { elClassName, imgUrl, imgAlt } = this.state
 

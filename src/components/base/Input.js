@@ -10,6 +10,10 @@ export default function Input({ targetEl, initialState, onChange }) {
     this.render()
   }
 
+  this.reset = () => {
+    this.setState(initialState)
+  }
+
   this.render = () => {
     const { elClassName, placeholder, value } = this.state
 

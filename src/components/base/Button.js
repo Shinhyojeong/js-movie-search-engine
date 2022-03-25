@@ -10,6 +10,10 @@ export default function Button({ targetEl, initialState, onClick }) {
     this.render()
   }
 
+  this.reset = () => {
+    this.setState(initialState)
+  }
+
   this.render = () => {
     const { elClassName, content, value } = this.state
 
