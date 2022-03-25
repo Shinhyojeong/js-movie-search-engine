@@ -13,6 +13,7 @@ module.exports = {
     alias: {
       "@api": path.resolve(__dirname, "src/api"),
       "@components": path.resolve(__dirname, "src/components"),
+      "@assets": path.resolve(__dirname, "src/assets"),
       "@base": path.resolve(__dirname, "src/components/base"),
       "@domain": path.resolve(__dirname, "src/components/domain"),
       "@data": path.resolve(__dirname, "src/data"),
@@ -30,6 +31,20 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: ["babel-loader"]
+      },
+      {
+        test: /\.(svg)$/i,
+        loader: "file-loader",
+        options: {
+          name: "assets/icon/[name].[ext]"
+        }
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: "file-loader",
+        options: {
+          name: "assets/image/[name].[ext]"
+        }
       }
     ]
   },
