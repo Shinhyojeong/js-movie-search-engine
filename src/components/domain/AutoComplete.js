@@ -15,7 +15,7 @@ export default function AutoComplete({ targetEl, initialState }) {
   }
 
   this.render = () => {
-    searchResultEl.innerHTML = ``
+    autoCompleteEl.innerHTML = ``
 
     const { resultList } = this.state
 
