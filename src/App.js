@@ -1,10 +1,31 @@
-import { Text } from "@base"
+import { Header, AutoComplete, SearchBar } from "@domain"
+import { request } from "@api/api"
 
 export default function App({ targetEl }) {
-  new Text({
+  this.state = {
+    resultList: []
+  }
+
+  this.setState = (nextState) => {
+    this.state = nextState
+  }
+
+  new Header({
     targetEl,
     initialState: {
-      content: "Test"
+      logo: "Movie Search Engine"
+    }
+  })
+
+  new SearchBar({
+    targetEl,
+    onSubmit: async (value) => {}
+  })
+
+  new AutoComplete({
+    targetEl,
+    initialState: {
+      resultList: this.state.resultList
     }
   })
 }
