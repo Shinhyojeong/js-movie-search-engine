@@ -1,9 +1,8 @@
-const API_END_POINT =
-  "https://5qfov74y3c.execute-api.ap-northeast-2.amazonaws.com/web-front"
+import { API } from "@data/constant"
 
 export const request = async (url = "") => {
   try {
-    const res = await fetch(`${API_END_POINT}${url}`)
+    const res = await fetch(`${API.END_POINT}${url}`)
 
     if (res.ok) {
       return res.json()
