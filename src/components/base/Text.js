@@ -10,11 +10,21 @@ export default function Text({ targetEl, initialState }) {
     this.render()
   }
 
+  this.reset = () => {
+    this.setState(initialState)
+  }
+
   this.render = () => {
-    const { elClassName, content } = this.state
+    const { elClassName, content, value } = this.state
 
     applyClassName(textEl, elClassName)
     textEl.innerHTML = `${content ?? ""}`
+
+    if (!value) {
+      return
+    }
+
+    textEl.dataset.id = value
   }
 
   this.render()
