@@ -46,6 +46,8 @@ export default function SearchBar({ targetEl, onSubmit }) {
     onClick: () => {
       searchInput.reset()
       cancelBtn.reset()
+
+      onSubmit("")
     }
   })
 
