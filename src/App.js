@@ -1,5 +1,6 @@
 import { Header, AutoComplete, SearchBar } from "@domain"
 import { request } from "@api/api"
+import { debounce } from "@utils/optimization"
 
 export default function App({ targetEl }) {
   this.state = {
@@ -23,14 +24,14 @@ export default function App({ targetEl }) {
 
   new SearchBar({
     targetEl,
-    onSubmit: async (value) => {
+    onSubmit: debounce(async (value) => {
       const resultList = await request(`/autocomplete?value=${value}`)
 
       this.setState({
         ...this.state,
         resultList
       })
-    }
+    }, 200)
   })
 
   const autoComplete = new AutoComplete({
