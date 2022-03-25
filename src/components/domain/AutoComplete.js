@@ -1,10 +1,10 @@
 import { Text } from "@base"
 import { createElement } from "@utils/handleElement"
 
-export default function SearchResult({ targetEl, initialState }) {
-  const searchResultEl = createElement({
+export default function AutoComplete({ targetEl, initialState }) {
+  const autoCompleteEl = createElement({
     elType: "ul",
-    elClassName: "search-result"
+    elClassName: "auto-complete"
   })
 
   this.state = initialState
@@ -21,7 +21,7 @@ export default function SearchResult({ targetEl, initialState }) {
 
     resultList?.forEach(({ text, id }) => {
       new Text({
-        targetEl: searchResultEl,
+        targetEl: autoCompleteEl,
         initialState: {
           elType: "li",
           content: text,
@@ -31,5 +31,5 @@ export default function SearchResult({ targetEl, initialState }) {
     })
   }
 
-  targetEl.append(searchResultEl)
+  targetEl.append(autoCompleteEl)
 }
