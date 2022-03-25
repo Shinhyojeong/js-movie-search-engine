@@ -52,7 +52,8 @@ export default function App({ targetEl }) {
   const autoComplete = new AutoComplete({
     targetEl,
     initialState: {
-      autoCompleteList: this.state.autoCompleteList
+      autoCompleteList: this.state.autoCompleteList,
+      selectedIdx: null
     }
   })
 }
