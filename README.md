@@ -1,6 +1,12 @@
 # js-movie-search-engine🌐 
 ## 🎬 시연 영상
 ![working_search_engine1](https://user-images.githubusercontent.com/70738281/160238421-7092f335-401d-4078-a6da-448bda1fc172.gif)
+## ⛳ 프로젝트 실행 방법
+```
+npm install
+
+npm run dev
+```
 
 ## 📌 설명
 - Vanilla JS를 사용해서 제작한 영화 검색기 프로젝트입니다.
