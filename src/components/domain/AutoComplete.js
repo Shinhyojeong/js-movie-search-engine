@@ -1,5 +1,6 @@
 import { Text } from "@base"
 import { createElement } from "@utils/handleElement"
+import { stateChangeIsNecessary } from "@utils/optimization"
 
 export default function AutoComplete({ targetEl, initialState }) {
   const autoCompleteEl = createElement({
@@ -10,6 +11,10 @@ export default function AutoComplete({ targetEl, initialState }) {
   this.state = initialState
 
   this.setState = (nextState) => {
+    if (!stateChangeIsNecessary(this.state, nextState)) {
+      return
+    }
+
     this.state = nextState
     this.render()
   }

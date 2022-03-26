@@ -1,4 +1,5 @@
 import { applyClassName, createElement } from "@utils/handleElement"
+import { stateChangeIsNecessary } from "@utils/optimization"
 
 export default function Text({ targetEl, initialState }) {
   const textEl = createElement({ elType: initialState.elType })
@@ -6,6 +7,10 @@ export default function Text({ targetEl, initialState }) {
   this.state = initialState
 
   this.setState = (nextState) => {
+    if (!stateChangeIsNecessary(this.state, nextState)) {
+      return
+    }
+
     this.state = nextState
     this.render()
   }

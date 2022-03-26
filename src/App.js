@@ -1,7 +1,7 @@
 import { Header, AutoComplete, SearchBar } from "@domain"
 import { request } from "@api/api"
 import storage from "@utils/storage"
-import { debounce } from "@utils/optimization"
+import { debounce, stateChangeIsNecessary } from "@utils/optimization"
 import { STORAGE } from "@data/constant"
 import "@style/searchPage.css"
 
@@ -15,6 +15,10 @@ export default function App({ targetEl }) {
   this.cache = storage.getItem(STORAGE.AUTO_COMPLETE_LIST, {})
 
   this.setState = (nextState) => {
+    if (!stateChangeIsNecessary(this.state, nextState)) {
+      return
+    }
+
     this.state = nextState
     autoComplete.setState({
       ...autoComplete.state,

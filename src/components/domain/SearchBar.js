@@ -1,6 +1,7 @@
 import { Button, Image, Input } from "@base"
 import { CANCEL_ICON, SEARCH_ICON } from "@data/constant"
 import { createElement } from "@utils/handleElement"
+import { stateChangeIsNecessary } from "@utils/optimization"
 
 export default function SearchBar({
   targetEl,
@@ -13,6 +14,10 @@ export default function SearchBar({
   this.state = initialState
 
   this.setState = (nextState) => {
+    if (!stateChangeIsNecessary(this.state, nextState)) {
+      return
+    }
+
     this.state = nextState
   }
 
