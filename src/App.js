@@ -6,13 +6,19 @@ import { STORAGE } from "@data/constant"
 import "@style/searchPage.css"
 
 export default function App({ targetEl }) {
-  this.state = {
+  const initialState = {
     autoCompleteList: [],
     autoCompleteVisible: false,
     keyword: null
   }
 
+  this.state = initialState
+
   this.cache = storage.getItem(STORAGE.AUTO_COMPLETE_LIST, {})
+
+  this.reset = () => {
+    this.setState(initialState)
+  }
 
   this.setState = (nextState) => {
     if (!stateChangeIsNecessary(this.state, nextState)) {
@@ -42,11 +48,7 @@ export default function App({ targetEl }) {
     },
     onSubmit: debounce(async (value) => {
       if (!value) {
-        this.setState({
-          ...this.state,
-          autoCompleteList: [],
-          autoCompleteVisible: false
-        })
+        this.reset()
 
         return
       }
@@ -67,7 +69,8 @@ export default function App({ targetEl }) {
       this.setState({
         ...this.state,
         autoCompleteList,
-        autoCompleteVisible: autoCompleteList.length > 0
+        autoCompleteVisible: autoCompleteList.length > 0,
+        keyword: value
       })
     }, 200),
     onFocus: (visible) => {
