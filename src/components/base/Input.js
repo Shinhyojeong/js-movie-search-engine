@@ -32,6 +32,11 @@ export default function Input({ targetEl, initialState, onChange }) {
   targetEl.append(inputEl)
 
   inputEl.addEventListener("input", (e) => {
+    this.setState({
+      ...this.state,
+      value: e.target.value
+    })
+
     onChange(e)
   })
 }
