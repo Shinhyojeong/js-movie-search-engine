@@ -6,7 +6,8 @@ import { STORAGE } from "@data/constant"
 
 export default function App({ targetEl }) {
   this.state = {
-    autoCompleteList: []
+    autoCompleteList: [],
+    autoCompleteVisible: false
   }
 
   this.cache = storage.getItem(STORAGE.AUTO_COMPLETE_LIST, {})
@@ -15,7 +16,8 @@ export default function App({ targetEl }) {
     this.state = nextState
     autoComplete.setState({
       ...autoComplete.state,
-      autoCompleteList: this.state.autoCompleteList
+      autoCompleteList: this.state.autoCompleteList,
+      autoCompleteVisible: this.state.autoCompleteVisible
     })
   }
 
@@ -29,6 +31,15 @@ export default function App({ targetEl }) {
   new SearchBar({
     targetEl,
     onSubmit: debounce(async (value) => {
+      if (!value) {
+        this.setState({
+          ...this.state,
+          autoCompleteList: []
+        })
+
+        return
+      }
+
       const cachedAutoCompleteList = this.cache[value]
 
       let autoCompleteList = null
@@ -46,14 +57,21 @@ export default function App({ targetEl }) {
         ...this.state,
         autoCompleteList
       })
-    }, 200)
+    }, 200),
+    onFocus: (visible) => {
+      this.setState({
+        ...this.state,
+        autoCompleteVisible: visible
+      })
+    }
   })
 
   const autoComplete = new AutoComplete({
     targetEl,
     initialState: {
       autoCompleteList: this.state.autoCompleteList,
-      selectedIdx: null
+      selectedIdx: null,
+      autoCompleteVisible: this.state.autoCompleteVisible
     }
   })
 }

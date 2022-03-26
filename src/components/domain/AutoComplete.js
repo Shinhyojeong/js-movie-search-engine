@@ -17,9 +17,9 @@ export default function AutoComplete({ targetEl, initialState }) {
   this.render = () => {
     autoCompleteEl.innerHTML = ``
 
-    const { autoCompleteList, selectedIdx } = this.state
+    const { autoCompleteList, selectedIdx, autoCompleteVisible } = this.state
 
-    autoCompleteEl.style.display = autoCompleteList ? "block" : "none"
+    autoCompleteEl.style.display = autoCompleteVisible ? "block" : "none"
 
     autoCompleteList?.forEach(({ text, id }, idx) => {
       new Text({
