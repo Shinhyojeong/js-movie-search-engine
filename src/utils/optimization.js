@@ -12,3 +12,6 @@ export const debounce = (fn, delay) => {
     }, delay)
   }
 }
+
+export const stateChangeIsNecessary = (currentState, nextState) =>
+  JSON.stringify(currentState) !== JSON.stringify(nextState)

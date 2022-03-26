@@ -1,4 +1,5 @@
 import { createElement, applyClassName } from "@utils/handleElement"
+import { stateChangeIsNecessary } from "@utils/optimization"
 
 export default function Input({ targetEl, initialState, onChange }) {
   const inputEl = createElement({ elType: "input" })
@@ -6,6 +7,10 @@ export default function Input({ targetEl, initialState, onChange }) {
   this.state = initialState
 
   this.setState = (nextState) => {
+    if (!stateChangeIsNecessary(this.state, nextState)) {
+      return
+    }
+
     this.state = nextState
     this.render()
   }
@@ -27,6 +32,11 @@ export default function Input({ targetEl, initialState, onChange }) {
   targetEl.append(inputEl)
 
   inputEl.addEventListener("input", (e) => {
+    this.setState({
+      ...this.state,
+      value: e.target.value
+    })
+
     onChange(e)
   })
 }

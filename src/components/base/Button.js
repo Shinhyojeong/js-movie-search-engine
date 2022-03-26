@@ -1,4 +1,5 @@
 import { createElement, applyClassName } from "@utils/handleElement"
+import { stateChangeIsNecessary } from "@utils/optimization"
 
 export default function Button({ targetEl, initialState, onClick }) {
   const buttonEl = createElement({ elType: "button" })
@@ -6,6 +7,10 @@ export default function Button({ targetEl, initialState, onClick }) {
   this.state = initialState
 
   this.setState = (nextState) => {
+    if (!stateChangeIsNecessary(this.state, nextState)) {
+      return
+    }
+
     this.state = nextState
     this.render()
   }

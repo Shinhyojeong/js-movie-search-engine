@@ -1,6 +1,7 @@
 import { Button, Image, Input } from "@base"
 import { CANCEL_ICON, SEARCH_ICON } from "@data/constant"
 import { createElement } from "@utils/handleElement"
+import { stateChangeIsNecessary } from "@utils/optimization"
 
 export default function SearchBar({
   targetEl,
@@ -13,6 +14,10 @@ export default function SearchBar({
   this.state = initialState
 
   this.setState = (nextState) => {
+    if (!stateChangeIsNecessary(this.state, nextState)) {
+      return
+    }
+
     this.state = nextState
   }
 
@@ -32,7 +37,6 @@ export default function SearchBar({
     },
     onChange: (e) => {
       const nextKeyword = e.target.value.trim()
-      const { keyword } = this.state
 
       if (!nextKeyword) {
         cancelBtn.reset()
@@ -41,10 +45,6 @@ export default function SearchBar({
           ...cancelBtn.state,
           elClassName: "search-clear visible"
         })
-      }
-
-      if (keyword === nextKeyword) {
-        return
       }
 
       this.setState({

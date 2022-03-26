@@ -1,4 +1,5 @@
 import { createElement, applyClassName } from "@utils/handleElement"
+import { stateChangeIsNecessary } from "@utils/optimization"
 
 export default function Image({ targetEl, initialState }) {
   const imageEl = createElement({ elType: "img" })
@@ -6,6 +7,10 @@ export default function Image({ targetEl, initialState }) {
   this.state = initialState
 
   this.setState = (nextState) => {
+    if (!stateChangeIsNecessary(this.state, nextState)) {
+      return
+    }
+
     this.state = nextState
     this.render()
   }
