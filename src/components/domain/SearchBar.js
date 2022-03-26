@@ -2,7 +2,7 @@ import { Button, Image, Input } from "@base"
 import { CANCEL_ICON, SEARCH_ICON } from "@data/constant"
 import { createElement } from "@utils/handleElement"
 
-export default function SearchBar({ targetEl, onSubmit }) {
+export default function SearchBar({ targetEl, onSubmit, onFocus }) {
   const searchBarEl = createElement({ elClassName: "search-bar" })
 
   const searchInput = new Input({
@@ -13,19 +13,18 @@ export default function SearchBar({ targetEl, onSubmit }) {
     },
     onChange: (e) => {
       const { value } = e.target
+      const keyword = value.trim()
 
-      if (!value) {
+      if (!keyword) {
         cancelBtn.reset()
-
-        return
+      } else {
+        cancelBtn.setState({
+          ...cancelBtn.state,
+          elClassName: "search-clear visible"
+        })
       }
 
-      cancelBtn.setState({
-        ...cancelBtn.state,
-        elClassName: "search-clear visible"
-      })
-
-      onSubmit(value)
+      onSubmit(keyword)
     }
   })
 
@@ -46,8 +45,20 @@ export default function SearchBar({ targetEl, onSubmit }) {
     onClick: () => {
       searchInput.reset()
       cancelBtn.reset()
+
+      onSubmit("")
     }
   })
 
   targetEl.append(searchBarEl)
+
+  const searchInputEl = document.querySelector(".search-input")
+
+  searchInputEl.addEventListener("focus", (e) => {
+    onFocus(true)
+  })
+
+  searchInputEl.addEventListener("blur", (e) => {
+    onFocus(false)
+  })
 }
