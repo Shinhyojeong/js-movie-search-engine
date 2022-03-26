@@ -37,7 +37,6 @@ export default function SearchBar({
     },
     onChange: (e) => {
       const nextKeyword = e.target.value.trim()
-      const { keyword } = this.state
 
       if (!nextKeyword) {
         cancelBtn.reset()
@@ -46,10 +45,6 @@ export default function SearchBar({
           ...cancelBtn.state,
           elClassName: "search-clear visible"
         })
-      }
-
-      if (keyword === nextKeyword) {
-        return
       }
 
       this.setState({
